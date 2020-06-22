@@ -1,0 +1,157 @@
+##This Config.yml is in use by FrameAPI
+##Pls don't change things you don't now what thit it!
+##Copyrighted By FrameDev
+##Have fun and don't make Config.yml Broken :D
+#
+#===============================
+#=          FrameDev           =
+#===============================
+
+##Use MYSQL
+MYSQL:
+  Host: ' '
+  User: ' '
+  Password: ' '
+  Database: ' '
+  Port: '3306'
+  Boolean: false
+
+# Save EnderChest in MYSQL
+SaveMYSQLEnderChest: false
+
+# This is for the Command openinv
+SaveInventoryMYSQL: false
+
+# Would you save Players Inventory in MYSQL���
+SavePlayersInventory: false
+
+# This is for the Command openinvnumber (number)
+# de groups under SaveInventoryMultiple is for the permission and how many
+SaveInventoryMultiple:
+  default: 4
+  master: 10
+
+
+##Get the Boolean for first Join Money
+StartMoney: false
+
+##Change the Money on first Join
+StartBudget: 1000
+
+##Change the Text when the Plugin is loading
+##Would you like to have the Message when yes true else false :D
+MessageOfReload:
+  Text: '&aHello &b[Player]'
+  Boolean: false
+
+##Every Night change it to day false = natural Day-Night circle
+NoNight: false
+
+##The First Money.Time is wich TimeStamp you get you'r Money the second/ Amount is your Amount to get the Money
+##Boolean is would you like to get the Money
+##20 = 1 Sec
+##Use this for the Time when you earn the Money from The FrameAPI
+##cmds == Money Commands to get Money or show Money!
+##MSG == Are the messages for the Money Commands!
+
+Money:
+  Time: 500
+  Amount: 100
+  Boolean: false
+  CMDS: false
+  MSG:
+    Balance: '&aYour money is &b[Money]'
+    Pay: '&aYou gave &b[Target] &b[Money]'
+    Set: '&aYour money has been set to &b[Money]'
+MoneyBalance:
+  Other:
+    MSG: '&aThe money from &b[Target] &ais &b[Money]'
+MoneySet:
+  Other:
+    MSG: '&aThe money from &b[Target] &ahas been set to &b[Money]'
+
+# Remove Money when Player is Dead
+RemoveMoneyDeath:
+  boolean: false
+  amount: 1000.0
+##Would like you to use the Teleporter Invenotry�
+Teleporter:
+  Inventory: false
+
+##Set Time in World
+##With the Methode setTimeMessage
+SetTime:
+  Message: false
+  Text: '&aTime set to &b[Time]'
+
+##Teleport to old Location can be disable
+OldLoc:
+  Teleport: false
+# What you would to use
+Util:
+#  - Money
+#  - Energy
+#  - Bank
+#Signs to use
+#Remove #in front of the Signs with you would to use
+Signs:
+#  - Money
+#  - Warp
+##MoneySigns Text Can be Changed
+MoneySign:
+  Balance: '&b[Bank Balance]'
+  Buy: '&aBuy'
+  Sell: '&aSell'
+  Free: '&aFree'
+
+##Use Denied Words in Chat with /denied add or / denied remove 
+Chat:
+  Denied: false
+
+
+##Would you like to use /setwarp or /warp?
+##/setwarp (warpname) / warp (warpname)
+Use:
+  Warps: false
+
+# Your MOTD, Server Name in Server Browser
+Motd:
+  Name: '&bFrameAPIMOTD Change this in &cConfig.yml'
+  Boolean: false
+
+# Prefix Change
+Prefix: '&6[&bFrame&9API&6]&f'
+#No Permission Text Don't use (')
+NoPerm: '&cYou don"t have access to this Command'
+
+# Would you have an Different JoinMessage or not in Messages.yml can you change the Text
+Join:
+  Message:
+    Boolean: true
+
+# Would you have an Different QuitMessage or not in Messages.yml can you change the Text
+
+Leave:
+  Message:
+    Boolean: true
+
+OfflinePlayers:
+  Money:
+    Boolean: false
+    Amount: 25
+    Time: 300
+
+# Rightclick to a Player to set it as Passenger to you
+SetPlayerPassenger: false
+
+
+# Set the Language Only en_EN or de_DE // en_EN = english // de_DE = german // en_EN is the Default language
+language: 'en_EN'
+
+AFK:
+  Time: 120
+  Boolean: true
+  IsAFK: '&7[Player] is now AFK'
+  IsNotAFK: '&7[Player] is no longer AFK'
+
+SkipNight: true
