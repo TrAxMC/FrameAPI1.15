@@ -19,27 +19,7 @@ public class Money implements Listener {
     private FileConfiguration cfgMoney = YamlConfiguration.loadConfiguration(this.fileMoney);
 
     public void createAccount(OfflinePlayer player) {
-        if (this.cfgMoney.getBoolean(player.getUniqueId() + "." + player.getName() + ".registered")) {
-            setRegistered(player,true);
-            saveMoneyFile();
-            loadFile();
-        } else {
-            this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".registered", Boolean.valueOf(true));
-            this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Money", Integer.valueOf(0));
-            this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Bank", Integer.valueOf(0));
-            setRegistered(player,true);
-            saveMoneyFile();
-            loadFile();
-        }
-    }
-
-    public void removeAccount(OfflinePlayer player) {
-        this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".registered", null);
-        this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Money", null);
-        this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Bank", null);
-        setRegistered(player,false);
-        saveMoneyFile();
-        loadFile();
+        Main.getInstance().getEco().createPlayerAccount(player);
     }
 
     private void saveMoneyFile() {
@@ -59,79 +39,12 @@ public class Money implements Listener {
     }
 
     public Double getMoney(OfflinePlayer player) {
-        if (Main.getInstance().getConfig().getBoolean("MYSQL.Boolean"))
-            try {
-                if (this.cfgMoney.getBoolean(player.getUniqueId() + "." + player.getName() + ".registered")) {
-                    loadFile();
-                    double d = getMoneyMySql(player);
-                    return d;
-                }
-                createAccount(player);
-                saveMoneyFile();
-                loadFile();
-                double money = getMoneyMySql(player).doubleValue();
-                return Double.valueOf(money);
-            } catch (NullPointerException e) {
-                return Double.valueOf(this.cfgMoney.getDouble(player.getUniqueId() + "." + player.getName() + ".Money"));
-            }
-        if (Main.cfgm.getBoolean("MongoDB.LocalHost") || Main.cfgm.getBoolean("MongoDB.Boolean")) {
-            return Double.valueOf(getMoneyFromMongo(player));
-        }
-        if (this.cfgMoney.getBoolean(player.getUniqueId() + "." + player.getName() + ".registered")) {
-            return Double.valueOf(this.cfgMoney.getDouble(player.getUniqueId() + "." + player.getName() + ".Money"));
-        }
-        createAccount(player);
-        return Double.valueOf(this.cfgMoney.getDouble(player.getUniqueId() + "." + player.getName() + ".Money"));
+        return Main.getInstance().getEco().getBalance(player);
     }
 
 
     public void addMoney(OfflinePlayer player, double amount) {
-        if (Main.getInstance().getConfig().getBoolean("MYSQL.Boolean")) {
-            if (isRegistered(player)) {
-                if (IsTableExist.isExist("money")) {
-                    double money = getMoneyMySql(player).doubleValue();
-                    money += amount;
-                    saveMoneyInSQL(player, money);
-                    saveMoneyFile();
-                    loadFile();
-                } else {
-                    SQL.createTable("money", new String[]{"PlayerName TEXT(64)", "balance_money DOUBLE", "bankmoney DOUBLE","Registered TEXT"});
-                    SQL.insertData("money", "'" + player.getName() + "','" + amount + "'", "PlayerName", "balance_money");
-                }
-            } else {
-                createAccount(player);
-                if (IsTableExist.isExist("money")) {
-                    double money = getMoneyMySql(player).doubleValue();
-                    money += amount;
-                    saveMoneyInSQL(player, money);
-                    saveMoneyFile();
-                    loadFile();
-                } else {
-                    SQL.createTable("money", "PlayerName TEXT(64)", "balance_money DOUBLE", "bankmoney DOUBLE","Registered TEXT");
-                    SQL.insertData("money", "'" + player.getName() + "','" + amount + "'", "PlayerName", "balance_money");
-                }
-            }
-        } else if (Main.cfgm.getBoolean("MongoDB.LocalHost") || Main.cfgm.getBoolean("MongoDB.Boolean")) {
-            createAccount(player);
-            double money = getMoneyFromMongo(player);
-            money += amount;
-            setMoneyMongo(player, money);
-        } else if (this.cfgMoney.getBoolean(player.getUniqueId() + "." + player.getName() + ".registered")) {
-            double money = getMoney(player).doubleValue();
-            money += amount;
-            this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Money", Double.valueOf(money));
-            saveMoneyFile();
-            loadFile();
-            createAccount(player);
-        } else {
-            createAccount(player);
-            double money = getMoney(player).doubleValue();
-            money += amount;
-            this.cfgMoney.set(player.getUniqueId() + "." + player.getName() + ".Money", Double.valueOf(money));
-            saveMoneyFile();
-            loadFile();
-        }
-        createAccount(player);
+        Main.getInstance().getEco().depositPlayer(player, amount);
     }
 
     public double getMoneyFromMongo(OfflinePlayer player) {

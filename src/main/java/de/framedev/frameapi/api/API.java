@@ -233,15 +233,11 @@ public class API implements Listener {
         try {
             if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("en_EN")) {
                 meta.addPage("§aWelcome §b" + p.getName() + "\n§aThis Book was Written by §b\n" + Author + "\n§aif you have any Questions contact me in the Forum");
-
-
                 book.setItemMeta((ItemMeta) meta);
                 return book;
             }
             if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("de_DE")) {
                 meta.addPage("§aWillkommen §b" + p.getName() + "\n§aDieses Buch wurde geschrieben von §b\n" + Author + "\n§aWenn du Fragen hast Kontaktiere mich im Forum!");
-
-
                 book.setItemMeta((ItemMeta) meta);
                 return book;
             }
@@ -256,11 +252,9 @@ public class API implements Listener {
         return Integer.valueOf(Bukkit.getOnlinePlayers().size());
     }
 
-
     public void addAllPlayerMoney(double money) {
         Bukkit.getOnlinePlayers().forEach(current -> eco.addMoney((OfflinePlayer) current, money));
     }
-
 
     public ItemStack createWrittenBook(String Displayname, String... pages) {
         ItemStack item = new ItemStack(Material.WRITTEN_BOOK);
@@ -274,7 +268,6 @@ public class API implements Listener {
         return item;
     }
 
-
     @Deprecated
     public void getSkull(String name, Player p) {
         ItemStack skull = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
@@ -282,10 +275,8 @@ public class API implements Listener {
         meta.setOwner(name);
         meta.setDisplayName(ChatColor.GREEN + name + "'s Head!");
         skull.setItemMeta(meta);
-
         p.getInventory().addItem(skull);
     }
-
 
     public void SetTime(long time) {
         for (World world : Bukkit.getWorlds()) {
@@ -304,7 +295,6 @@ public class API implements Listener {
             }
         }
     }
-
 
     public void shootArrow(Player shooter, Player target) {
         if (target != null) {
@@ -342,7 +332,6 @@ public class API implements Listener {
         }
     }
 
-
     private String getDate() {
         return this.Uhrzeit2;
     }
@@ -372,11 +361,9 @@ public class API implements Listener {
         }
     }
 
-
     public void setOP(Player p, boolean op) {
         p.setOp(op);
     }
-
 
     public String playerNames() {
         String names1 = "";
@@ -387,38 +374,31 @@ public class API implements Listener {
         return names1;
     }
 
-
     public void openEnderChest(Player player) {
         player.openInventory(player.getEnderChest());
     }
-
 
     public void openOtherEnderChest(Player player, Player target) {
         player.openInventory(target.getEnderChest());
     }
 
-
     public void openWorkBench(Player player) {
         player.openWorkbench(player.getLocation(), true);
     }
 
-
     public void openInventoryOther(Player player, Player target) {
         player.openInventory((Inventory) target.getInventory());
     }
-
 
     @Deprecated
     public void SetPassengetToTarget(Player target, Entity entity) {
         target.setPassenger(entity);
     }
 
-
     public void godMode(Player player, String message, boolean godmode) {
         player.setInvulnerable(godmode);
         player.sendMessage(message);
     }
-
 
     public void savePlayerlocation(Player player) {
         Location loc = player.getLocation();
@@ -432,7 +412,6 @@ public class API implements Listener {
         cfglocation.set(player.getName() + ".pitch", Float.valueOf(loc.getPitch()));
         saveCfgLocationplayer();
     }
-
 
     private void saveCfgLocationplayer() {
         try {
@@ -545,7 +524,6 @@ public class API implements Listener {
             }
         }
     }
-
 
     public boolean showOpPlayer(Player p) {
         if (p.isOp()) {

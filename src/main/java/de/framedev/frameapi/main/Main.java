@@ -2,6 +2,7 @@ package de.framedev.frameapi.main;
 
 import de.framedev.frameapi.api.API;
 import de.framedev.frameapi.api.SavePlayersInventory;
+import de.framedev.frameapi.api.VaultAPI;
 import de.framedev.frameapi.glass.Cocktail;
 import de.framedev.frameapi.kits.KitManager;
 
@@ -17,6 +18,7 @@ import de.framedev.frameapi.utils.Init;
 import de.framedev.frameapi.utils.Lags;
 import de.framedev.frameapi.utils.ReplaceCharConfig;
 import de.framedev.frameapi.warps.WarpSigns;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +39,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
@@ -56,10 +59,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-@SuppressWarnings( "deprecation" )
+@SuppressWarnings("deprecation")
 public final class Main extends JavaPlugin implements Listener {
 
     private static int resource = 68558;
@@ -81,6 +85,7 @@ public final class Main extends JavaPlugin implements Listener {
     public static File filem = new File("plugins/MDBConnection/config.yml");
     public static FileConfiguration cfgm = (FileConfiguration) YamlConfiguration.loadConfiguration(filem);
     private boolean mongodb;
+    private VaultAPI eco;
 
 
     public void onEnable() {
@@ -95,12 +100,12 @@ public final class Main extends JavaPlugin implements Listener {
         if (getConfig().getBoolean("MYSQL.Boolean")) {
             try {
                 MYSQL.connect();
-                SQL.createTable("money", "PlayerName TEXT(64)", "balance_money DOUBLE", "bankmoney DOUBLE","Registered TEXT");
+                SQL.createTable("money", "PlayerName TEXT(64)", "balance_money DOUBLE", "bankmoney DOUBLE", "Registered TEXT");
             } catch (NullPointerException ex) {
                 Bukkit.getConsoleSender().sendMessage("§cPlease edit Config.yml :: MySQL Section!!!");
             }
         }
-        if(getConfig().getBoolean("BungeeCord")) {
+        if (getConfig().getBoolean("BungeeCord")) {
             this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new ServerManager());
         }
@@ -169,10 +174,17 @@ public final class Main extends JavaPlugin implements Listener {
             public void run() {
                 thread.start();
             }
-        }.runTaskLater(this,320);
+        }.runTaskLater(this, 320);
         api.init();
         new Init(this);
+        if(Bukkit.getPluginManager().getPlugin("Vault") != null) {
+            setup();
+        }
         Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §6Successfully Loaded!!!");
+    }
+
+    public VaultAPI getEco() {
+        return eco;
     }
 
     public boolean isMongoDb() {
@@ -197,17 +209,6 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
-    public String[] animation = new String[]{ "§b§l" +
-            getNameThis() + "", "§3§l" +
-            getNameThis() + "", "§9§l" +
-            getNameThis() + "", "§6§l" +
-            getNameThis() + "", "§7§l" +
-            getNameThis() + "", "§1§l" +
-            getNameThis() + "", "§f§l" +
-            getNameThis() + "", "§e§l" +
-            getNameThis() + "", "§d§l" +
-            getNameThis() + "" };
-
     public static Main getInstance() {
         return mi;
     }
@@ -220,12 +221,12 @@ public final class Main extends JavaPlugin implements Listener {
             String oldVersion = Main.getInstance().getDescription().getVersion();
             String newVersion = br.readLine();
             if (!newVersion.equalsIgnoreCase(oldVersion)) {
-                    player.sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
-                    TextComponent tc = new TextComponent();
-                    tc.setText(FrameMainGet.getPrefix() + " §6[§bKlick Hier für die Seite zu öffnen§6]");
-                    tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(" öffne Download Seite").create()));
-                    tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/frameapi.68558/"));
-                    player.spigot().sendMessage(tc);
+                player.sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
+                TextComponent tc = new TextComponent();
+                tc.setText(FrameMainGet.getPrefix() + " §6[§bKlick Hier für die Seite zu öffnen§6]");
+                tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(" öffne Download Seite").create()));
+                tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/frameapi.68558/"));
+                player.spigot().sendMessage(tc);
             } else {
                 player.sendMessage(FrameMainGet.getPrefix() + " You're running the newest plugin version!");
             }
@@ -233,7 +234,8 @@ public final class Main extends JavaPlugin implements Listener {
             player.sendMessage(FrameMainGet.getPrefix() + " Failed to check for updates on spigotmc.org");
         }
     }
-        public static void dispatch(final CommandSender sender, final String command) {
+
+    public static void dispatch(final CommandSender sender, final String command) {
         try {
             boolean bool = (Boolean) Bukkit.getScheduler().callSyncMethod((Plugin) getInstance(), new Callable<Boolean>() {
                 public Boolean call() {
@@ -243,7 +245,7 @@ public final class Main extends JavaPlugin implements Listener {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        }
+    }
 
     public MongoManager getMongoManager() {
         return this.mongoManager;
@@ -255,20 +257,16 @@ public final class Main extends JavaPlugin implements Listener {
 
 
     public Runnable savePlayersInventory() {
-        return new Runnable() {
+        return () -> new BukkitRunnable() {
             @Override
             public void run() {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.getOnlinePlayers().forEach(o -> {
-                            new SavePlayersInventory().savePlayerInventory(o);
-                        });
-                    }
-                }.runTaskTimer(Main.getInstance(),0,1200);
+                Bukkit.getOnlinePlayers().forEach(o -> {
+                    new SavePlayersInventory().savePlayerInventory(o);
+                });
             }
-        };
+        }.runTaskTimer(Main.getInstance(), 0, 1200);
     }
+
     public String getNameThis() {
         this.namethis = getConfig().getString("Tablist.Header");
         return this.namethis;
@@ -320,49 +318,49 @@ public final class Main extends JavaPlugin implements Listener {
         }
         if (command.getName().equalsIgnoreCase("getwheat")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().getWheat(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("setwheat")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
-                new CropsManager().setWheat(player.getWorld(),player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
+                Block player = ((BlockCommandSender) sender).getBlock();
+                new CropsManager().setWheat(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("getcarrot")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().getCarrot(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("setcarrot")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().setCarrot(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("getpotato")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().getPotato(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("setpotato")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().setPotato(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("setsugarcane")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().setSugarCane(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
         if (command.getName().equalsIgnoreCase("getsugarcane")) {
             if (sender instanceof BlockCommandSender) {
-                Block player = ((BlockCommandSender)sender).getBlock();
+                Block player = ((BlockCommandSender) sender).getBlock();
                 new CropsManager().getSugarCane(player.getWorld(), player.getLocation().getBlockX() + 10, player.getLocation().getBlockX() - 10, player.getLocation().getBlockY() + 10, player.getLocation().getBlockY() - 10, player.getLocation().getBlockZ() + 10, player.getLocation().getBlockZ() - 10);
             }
         }
@@ -522,7 +520,7 @@ public final class Main extends JavaPlugin implements Listener {
             String oldVersion = Main.getInstance().getDescription().getVersion();
             String newVersion = br.readLine();
             if (!newVersion.equalsIgnoreCase(oldVersion)) {
-                    Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
+                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
             } else {
                 Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " You're running the newest plugin version!");
             }
@@ -548,6 +546,48 @@ public final class Main extends JavaPlugin implements Listener {
         return path.delete();
     }
 
+    public void setup() {
+        File filedata = new File(Main.getInstance().getDataFolder() + "/money","eco.yml");
+        FileConfiguration cfgdata = YamlConfiguration.loadConfiguration(filedata);
+        if(!filedata.exists()) {
+            filedata.getParentFile().mkdirs();
+            try {
+                filedata.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(Bukkit.getServer().getOnlineMode()) {
+            if(!cfgdata.contains("accounts")) {
+                ArrayList<String> accounts = new ArrayList<>();
+                accounts.add("14555508-6819-4434-aa6a-e5ce1509ea35");
+                cfgdata.set("accounts",accounts);
+                try {
+                    cfgdata.save(filedata);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            if(!cfgdata.contains("accounts")) {
+                ArrayList<String> accounts = new ArrayList<>();
+                accounts.add("sambakuchen");
+                cfgdata.set("accounts",accounts);
+                try {
+                    cfgdata.save(filedata);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        getServer().getServicesManager().register(Economy.class,new VaultAPI(),this, ServicePriority.Normal);
+        eco = new VaultAPI();
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (!eco.hasAccount(p.getName()))
+                eco.createPlayerAccount(p.getName());
+        }
+    }
+
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (command.getName().equalsIgnoreCase("addentity")) {
             ArrayList<String> type = new ArrayList<>();
@@ -569,7 +609,7 @@ public final class Main extends JavaPlugin implements Listener {
         public static void setPrefix(String prefix) {
             prefix = Main.getInstance().getConfig().getString("Prefix");
             prefix = prefix.replace('&', '§');
-            Main.noperm = Main.noperm.replace('\"','\'');
+            Main.noperm = Main.noperm.replace('\"', '\'');
             Main.getInstance();
             Main.prefix = prefix;
 
@@ -578,7 +618,7 @@ public final class Main extends JavaPlugin implements Listener {
         public static String getNoPerm() {
             Main.noperm = Main.getInstance().getConfig().getString("NoPerm");
             Main.noperm = ReplaceCharConfig.replaceParagraph(Main.noperm);
-            Main.noperm = Main.noperm.replace('\"','\'');
+            Main.noperm = Main.noperm.replace('\"', '\'');
             return Main.noperm;
         }
 
@@ -598,7 +638,7 @@ public final class Main extends JavaPlugin implements Listener {
     public static void setPrefix(String prefix) {
         prefix = Main.getInstance().getConfig().getString("Prefix");
         prefix = prefix.replace('&', '§');
-        Main.noperm = Main.noperm.replace('\"','\'');
+        Main.noperm = Main.noperm.replace('\"', '\'');
         Main.getInstance();
         Main.prefix = prefix;
 
@@ -607,7 +647,7 @@ public final class Main extends JavaPlugin implements Listener {
     public static String getNoPerm() {
         Main.noperm = Main.getInstance().getConfig().getString("NoPerm");
         Main.noperm = ReplaceCharConfig.replaceParagraph(Main.noperm);
-        Main.noperm = Main.noperm.replace('\"','\'');
+        Main.noperm = Main.noperm.replace('\"', '\'');
         return Main.noperm;
     }
 

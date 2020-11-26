@@ -312,9 +312,9 @@ public class CapacitorListener
                     .getBlock().getType() == Material.OBSIDIAN && block4.getBlock().getType() == Material.OBSIDIAN &&
                     block.getType() == Material.GLASS) {
                 if (!this.cfg.getBoolean("Glass." + event.getPlayer().getName() + ".boolean")) {
-                    this.cfg.set("Glass." + event.getPlayer().getName() + ".x", Integer.valueOf(event.getBlock().getX()));
-                    this.cfg.set("Glass." + event.getPlayer().getName() + ".y", Integer.valueOf(event.getBlock().getY()));
-                    this.cfg.set("Glass." + event.getPlayer().getName() + ".z", Integer.valueOf(event.getBlock().getZ()));
+                    this.cfg.set("Glass." + event.getPlayer().getName() + ".x", event.getBlock().getX());
+                    this.cfg.set("Glass." + event.getPlayer().getName() + ".y", event.getBlock().getY());
+                    this.cfg.set("Glass." + event.getPlayer().getName() + ".z", event.getBlock().getZ());
                     this.cfg.set("Glass." + event.getPlayer().getName() + ".boolean", Boolean.valueOf(true));
 
                     saveCfg();
