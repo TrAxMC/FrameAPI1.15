@@ -15,6 +15,34 @@ import java.util.UUID;
 public class BackendManager {
     private Main plugin;
 
+    public enum DATA {
+        NAME("name"),
+        MONEY("money"),
+        DAMAGE("damage"),
+        ENTITYKILLS("entityKills"),
+        DEATHS("deaths"),
+        BLOCKSBROKEN("blocksBroken"),
+        BLOCKSPLACEN("blocksPlacen"),
+        COMMANDSUSED("commandsUsed"),
+        KEY("key"),
+        ENTITYTYPES("entityTypes"),
+        OFFLINE("offline"),
+        SLEEPTIMES("sleepTimes"),
+        CREATEDATE("createDate"),
+        LASTLOGIN("lastLogin"),
+        LASTLOGOUT("lastLogout");
+
+        private final String name;
+
+        DATA(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
     public BackendManager(Main plugin) {
         this.plugin = plugin;
     }

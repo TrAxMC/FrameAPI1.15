@@ -1128,23 +1128,15 @@ public class FrameAPICMDS
 
         } else if (command.getName().equalsIgnoreCase("kits") &&
                 args.length == 1) {
-
             ArrayList<String> list = new ArrayList<>();
-
             ConfigurationSection cs = KitManager.getCustomConfig().getConfigurationSection("Items");
-
             for (String s : cs.getKeys(false)) {
-
                 if (sender.hasPermission("frameapi." + s)) {
-
                     list.add(s);
                 }
             }
-
             return list;
         }
-
-
         return null;
     }
 

@@ -68,6 +68,7 @@ public class CustomConfig implements CustomConfigInterface {
 
     public void set(String path,Object object) {
         cfg.set(path,object);
+		saveConfig();
     }
 
     public String getString(String path) {
@@ -85,4 +86,11 @@ public class CustomConfig implements CustomConfigInterface {
     public Object get(String path) {
         return cfg.get(path);
     }
+	
+	public boolean contains(String path) {
+		if(cfg.contains(path)) {
+			return true;
+		}
+		return false;
+	}
 }

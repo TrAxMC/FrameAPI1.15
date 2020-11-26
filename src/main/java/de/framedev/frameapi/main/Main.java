@@ -80,6 +80,7 @@ public final class Main extends JavaPlugin implements Listener {
     private String namethis = "";
     public static File filem = new File("plugins/MDBConnection/config.yml");
     public static FileConfiguration cfgm = (FileConfiguration) YamlConfiguration.loadConfiguration(filem);
+    private boolean mongodb;
 
 
     public void onEnable() {
@@ -107,10 +108,12 @@ public final class Main extends JavaPlugin implements Listener {
             if (cfgm.getBoolean("MongoDB.LocalHost")) {
                 this.mongoManager = new MongoManager();
                 this.mongoManager.connectLocalHost();
+                mongodb = true;
             }
             if (cfgm.getBoolean("MongoDB.Boolean")) {
                 this.mongoManager = new MongoManager();
                 this.mongoManager.connect();
+                mongodb = true;
             }
             if (cfgm.getBoolean("MongoDB.LocalHost")) {
                 this.backendManager = new BackendManager(this);
@@ -170,6 +173,14 @@ public final class Main extends JavaPlugin implements Listener {
         api.init();
         new Init(this);
         Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §6Successfully Loaded!!!");
+    }
+
+    public boolean isMongoDb() {
+        return mongodb;
+    }
+
+    public boolean isMysql() {
+        return getConfig().getBoolean("MYSQL.Boolean");
     }
 
     public void onDisable() {

@@ -16,19 +16,17 @@
             <version>3.11.0</version>
         </dependency>
         <dependency>
-            <groupId>org.spigot</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.14.4</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/spigot.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.6</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
@@ -46,6 +44,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
