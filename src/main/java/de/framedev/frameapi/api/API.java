@@ -174,7 +174,7 @@ public class API implements Listener {
 
     public void StartUp(Main plugin) {
         if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("en_EN")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Attention this Plugin work's Only in this Versions 1.13 - 1.15!");
+            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Attention this Plugin work's Only in this Versions 1.13 - 1.16!");
             Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4if you want a specific version then write me in the forum!");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
@@ -185,7 +185,7 @@ public class API implements Listener {
             ConfigStartup();
             Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §bLoaded");
         } else if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("de_DE")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Achtung dieses Plugin funktioniert nur in den Versionen 1.13 - 1.15");
+            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Achtung dieses Plugin funktioniert nur in den Versionen 1.13 - 1.16");
             Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Wenn du eine eigene Version haben moechtest Kontaktiere mich im Forum");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
