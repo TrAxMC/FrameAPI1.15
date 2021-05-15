@@ -12,7 +12,6 @@ import de.framedev.frameapi.mongodb.BackendManager;
 import de.framedev.frameapi.mongodb.MongoManager;
 import de.framedev.frameapi.mysql.MYSQL;
 import de.framedev.frameapi.mysql.SQL;
-import de.framedev.frameapi.pets.Pets;
 import de.framedev.frameapi.utils.Config;
 import de.framedev.frameapi.utils.Init;
 import de.framedev.frameapi.utils.Lags;
@@ -57,7 +56,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -71,7 +69,6 @@ public final class Main extends JavaPlugin implements Listener {
     private static Main mi;
     private static API api = new API();
     private static KitManager kit = new KitManager();
-    private static Pets pet = new Pets();
     private static String noperm;
     private static String prefix;
     public ArrayList<String> pays = new ArrayList<>();
@@ -128,7 +125,6 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
         if (getConfig().getString("language").equalsIgnoreCase("en_EN")) {
-            pet.getClass();
             if (getInstance().getConfig().getBoolean("NoNight")) {
                 api.NoNight();
             } else {
@@ -145,7 +141,6 @@ public final class Main extends JavaPlugin implements Listener {
             }
             api.onUpdate();
         } else if (getConfig().getString("language").equalsIgnoreCase("de_DE")) {
-            pet.getClass();
             if (getInstance().getConfig().getBoolean("NoNight")) {
                 api.NoNight();
             } else {
@@ -196,16 +191,12 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void onDisable() {
-        for (String name : Pets.Pet.keySet()) {
-            Pets.Pet.get(name).remove();
-        }
         Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §aDeactivated!");
         api.onUpdate();
         if (getConfig().getBoolean("MYSQL.Boolean") &&
                 MYSQL.con != null) {
             MYSQL.close();
             Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " " + MYSQL.MySQLPrefix + " §bMYSQL Closed!");
-            return;
         }
     }
 

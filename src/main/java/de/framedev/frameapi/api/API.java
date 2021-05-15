@@ -67,7 +67,6 @@ import de.framedev.frameapi.managers.ItemBuilder;
 import de.framedev.frameapi.mysql.IsTableExist;
 import de.framedev.frameapi.mysql.MYSQL;
 import de.framedev.frameapi.mysql.SQL;
-import de.framedev.frameapi.pets.Pets;
 import de.framedev.frameapi.utils.Config;
 import de.framedev.frameapi.utils.Information;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -464,15 +463,6 @@ public class API implements Listener {
                 eco.removeMoney(p, amount);
             }
         }
-    }
-
-    public void createPet(Player player, EntityType type, String name, double speed, boolean cangetBabies) {
-        Pets pet = new Pets();
-        pet.createPet(player, type, name, speed, cangetBabies);
-    }
-    public void removePet(Player player) {
-        Pets pet = new Pets();
-        pet.removePet(player);
     }
 
     @Deprecated
@@ -1025,7 +1015,6 @@ public class API implements Listener {
         tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aöffne Donation Seite").create()));
         tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://streamlabs.com/framedesigner_plays/tip"));
         player.spigot().sendMessage(tc);
-
     }
 
     public static class Locations {
