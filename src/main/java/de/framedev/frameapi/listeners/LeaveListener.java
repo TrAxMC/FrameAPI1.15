@@ -45,11 +45,11 @@ import java.sql.ResultSet;
            if (res.next()) {
              if (res.getString("PlayerName") == null) {
                statement.executeUpdate("INSERT INTO offline (PlayerName,boolean) VALUES ('" + e.getPlayer().getName() + "','yes');");
-               Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b §cInserted");
+               Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b §cInserted");
              } else {
                String sql2 = "UPDATE offline SET boolean = 'yes' WHERE PlayerName = '" + e.getPlayer().getName() + "'";
                statement.executeUpdate(sql2);
-               Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b Updated info");
+               Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b Updated info");
              } 
            } else {
              statement.executeUpdate("INSERT INTO offline (PlayerName,boolean) VALUES ('" + e.getPlayer().getName() + "','yes');");
@@ -90,11 +90,11 @@ import java.sql.ResultSet;
            if (res.next()) {
              if (res.getString("PlayerName") == null) {
                statement.executeUpdate("INSERT INTO offline (PlayerName,boolean) VALUES ('" + e.getPlayer().getName() + "','yes');");
-               Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b §cInserted");
+               Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b §cInserted");
              } else {
                String sql2 = "UPDATE offline SET boolean = 'yes' WHERE PlayerName = '" + e.getPlayer().getName() + "'";
                statement.executeUpdate(sql2);
-               Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b Updated info");
+               Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b Updated info");
              } 
            } else {
              statement.executeUpdate("INSERT INTO offline (PlayerName,boolean) VALUES ('" + e.getPlayer().getName() + "','yes');");

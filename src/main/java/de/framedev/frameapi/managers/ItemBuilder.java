@@ -82,7 +82,7 @@ public class ItemBuilder {
             return null;
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "Â§cItemStack oder ItemMeta ist Â§6null");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "Â§cItemStack oder ItemMeta ist Â§6null");
             return null;
         }
     }

@@ -34,7 +34,7 @@
        if (e.getPlayer().hasPermission("frameapi.signs.create")) {
          e.setLine(0, "§bBalanceBank");
        } else {
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -56,7 +56,7 @@
                e.getPlayer().sendMessage("§aDu hast auf deinem Bank Account §b" + eco.getMoneyFromBankMySQL((OfflinePlayer)e.getPlayer()));
              } 
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            } 
          }
        } 
@@ -77,7 +77,7 @@
            e.setLine(1, money + "");
          } 
        } else {
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -113,7 +113,7 @@
                } 
              }
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            } 
          }
        } 
@@ -132,7 +132,7 @@
            e.setLine(1, money + "");
          } 
        } else {
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -168,7 +168,7 @@
                } 
              }
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            }  
        } 
      } 

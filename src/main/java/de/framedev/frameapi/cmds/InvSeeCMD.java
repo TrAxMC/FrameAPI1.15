@@ -35,16 +35,16 @@ public class InvSeeCMD implements CommandExecutor {
                         if (target != player) {
                             player.openInventory(target.getInventory());
                         } else {
-                            player.sendMessage(Main.FrameMainGet.getPrefix() + " §cYou can't see your own Inventory!");
+                            player.sendMessage(Main.Variables.getPrefix() + " §cYou can't see your own Inventory!");
                         }
                     } else {
-                        player.sendMessage(Main.FrameMainGet.getPrefix() + " §cThis Player doesn't exist!");
+                        player.sendMessage(Main.Variables.getPrefix() + " §cThis Player doesn't exist!");
                     }
                 } else {
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else {
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " §cPlease use /invsee <PlayerName>!");
+                player.sendMessage(Main.Variables.getPrefix() + " §cPlease use /invsee <PlayerName>!");
             }
         }
         return false;

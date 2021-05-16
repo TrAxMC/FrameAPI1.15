@@ -29,11 +29,11 @@ public class TrashCMD implements CommandExecutor {
                 player.openInventory(inventory);
                 return true;
             } else {
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 return true;
             }
         } else {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §cYou need to be a Player!");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §cYou need to be a Player!");
             return true;
         }
     }

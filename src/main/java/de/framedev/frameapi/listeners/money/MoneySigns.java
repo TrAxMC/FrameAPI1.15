@@ -38,7 +38,7 @@
          signName = signName.replace('&', '§');
          e.setLine(0, signName);
        } else {
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -62,7 +62,7 @@
              text = text.replace('&', '§');
              e.getPlayer().sendMessage(text);
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            } 
          }
        } 
@@ -92,7 +92,7 @@
        
        } else {
          
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      } 
    }
@@ -115,7 +115,7 @@
        
        } else {
          
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -143,7 +143,7 @@
                  return;
                } 
              } else {
-               e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+               e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
              } 
            }
          } 
@@ -186,7 +186,7 @@
                return;
              } 
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            } 
          }
        } 
@@ -216,7 +216,7 @@
        }
        else {
          
-         e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
    }
@@ -255,7 +255,7 @@
                return;
              } 
            } else {
-             e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            }  
        } 
      } 

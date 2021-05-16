@@ -84,7 +84,7 @@ public class AFK implements CommandExecutor {
                     return true;
                 }
             } else {
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 return true;
             }
         }

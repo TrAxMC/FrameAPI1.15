@@ -48,7 +48,7 @@
            sender.sendMessage("§cPlease use §b/v §cor §b/vanish");
          } 
        } else {
-         sender.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+         sender.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
        } 
      }
      return false;

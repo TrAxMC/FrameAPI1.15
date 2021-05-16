@@ -1,6 +1,5 @@
 package de.framedev.frameapi.cmds;
 
-import de.framedev.frameapi.api.API;
 import de.framedev.frameapi.api.money.Money;
 import de.framedev.frameapi.main.Main;
 import org.bukkit.Bukkit;
@@ -76,7 +75,7 @@ public class MoneyBankCMD
                         p.sendMessage("§cPlease use §a/deposit (amount");
                     }
                 } else {
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else if (cmd.getName().equalsIgnoreCase("withdraw")) {
                 final Player p = (Player) sender;
@@ -116,7 +115,7 @@ public class MoneyBankCMD
                         p.sendMessage("§cPlease use §a/withdraw (amount");
                     }
                 } else {
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else if (cmd.getName().equalsIgnoreCase("transfer")) {
                 final Player p = (Player) sender;
@@ -169,7 +168,7 @@ public class MoneyBankCMD
                         p.sendMessage("§cPlease use §a/transfer (target) (amount");
                     }
                 } else {
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else if (cmd.getName().equalsIgnoreCase("setbank")) {
                 if (args.length != 0) {
@@ -180,7 +179,7 @@ public class MoneyBankCMD
                             this.eco.SaveMoneyInBank((OfflinePlayer) p, x);
                             p.sendMessage("§aYour Bank Account have been Succssesfully set to §b" + x);
                         } else {
-                            p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                            p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                         }
                     } else if (args.length == 2) {
                         final Player p = (Player) sender;
@@ -214,7 +213,7 @@ public class MoneyBankCMD
                                 p.sendMessage("§aYour have been successful set the Bank Account from §b" + offline.getName() + "§a to §b" + x);
                             }
                         } else {
-                            p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                            p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                         }
                     } else {
                         final Player p = (Player) sender;
@@ -228,7 +227,7 @@ public class MoneyBankCMD
                         final double x = this.eco.getMoneyFromBankMySQL((OfflinePlayer) p).doubleValue();
                         p.sendMessage("§aYour Bank Account have §b" + x);
                     } else {
-                        p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                        p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     }
                 } else if (args.length == 1) {
                     final Player target = Bukkit.getPlayer(args[0]);
@@ -243,7 +242,7 @@ public class MoneyBankCMD
                             p.sendMessage("§aThe Bank Account from §b" + offline.getName() + "§a is §b" + x);
                         }
                     } else {
-                        p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                        p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     }
                 } else {
                     final Player p = (Player) sender;

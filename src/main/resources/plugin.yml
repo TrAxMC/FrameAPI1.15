@@ -1,6 +1,6 @@
 name: FrameAPI
 author: FrameDev
-version: 4.4.6
+version: ${project.version}
 api-version: 1.13
 description: FrameAPI this API add much things to your Minecraft!
 main: de.framedev.frameapi.main.Main

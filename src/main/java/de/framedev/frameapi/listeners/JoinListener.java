@@ -103,12 +103,12 @@ public class JoinListener
                             if (res.next()) {
                                 if (res.getString("PlayerName") == null) {
                                     statement.executeUpdate("INSERT INTO offline (PlayerName,boolean) VALUES ('" + e.getPlayer().getName() + "','no');");
-                                    Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b §cInserted");
+                                    Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b §cInserted");
                                     return;
                                 }
                                 String sql2 = "UPDATE offline SET boolean = 'no' WHERE PlayerName = '" + e.getPlayer().getName() + "'";
                                 statement.executeUpdate(sql2);
-                                Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§b Updated info");
+                                Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§b Updated info");
 
                                 return;
                             }

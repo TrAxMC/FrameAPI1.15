@@ -132,8 +132,8 @@ public class API implements Listener {
 
 
     public void onUpdate() {
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§a version 4.4.6 = §bBug Fixes, §aMoney Fix");
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §aThis Plugin was written by §bFrameDev");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§a version 4.4.6 = §bBug Fixes, §aMoney Fix");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §aThis Plugin was written by §bFrameDev");
     }
 
     public void init() {
@@ -143,10 +143,10 @@ public class API implements Listener {
 
     public void getInformation(Player p) {
         ArrayList<String> string = new ArrayList<>();
-        string.add(0, Main.FrameMainGet.getPrefix() + " §bPlugin Name = §a" + name);
-        string.add(1, Main.FrameMainGet.getPrefix() + " §bAuthor = §a" + Author);
-        string.add(2, Main.FrameMainGet.getPrefix() + " §bVersion = §a" + version);
-        string.add(3, Main.FrameMainGet.getPrefix() + " §bApi Version = §a" + apiversion);
+        string.add(0, Main.Variables.getPrefix() + " §bPlugin Name = §a" + name);
+        string.add(1, Main.Variables.getPrefix() + " §bAuthor = §a" + Author);
+        string.add(2, Main.Variables.getPrefix() + " §bVersion = §a" + version);
+        string.add(3, Main.Variables.getPrefix() + " §bApi Version = §a" + apiversion);
         for (String s : string) {
             p.sendMessage(s);
         }
@@ -158,10 +158,10 @@ public class API implements Listener {
 
     public void InformationStartup() {
         ArrayList<String> string = new ArrayList<>();
-        string.add(0, Main.FrameMainGet.getPrefix() + " §bPlugin Name = §a" + name);
-        string.add(1, Main.FrameMainGet.getPrefix() + " §bAuthor = §a" + Author);
-        string.add(2, Main.FrameMainGet.getPrefix() + " §bVersion = §a" + version);
-        string.add(3, Main.FrameMainGet.getPrefix() + " §bApi Version = §a" + apiversion);
+        string.add(0, Main.Variables.getPrefix() + " §bPlugin Name = §a" + name);
+        string.add(1, Main.Variables.getPrefix() + " §bAuthor = §a" + Author);
+        string.add(2, Main.Variables.getPrefix() + " §bVersion = §a" + version);
+        string.add(3, Main.Variables.getPrefix() + " §bApi Version = §a" + apiversion);
         ArrayList<String> issues = new ArrayList<>();
         issues.add("§cEnergy is Work in progress");
         for (String s : string) {
@@ -173,8 +173,8 @@ public class API implements Listener {
 
     public void StartUp(Main plugin) {
         if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("en_EN")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Attention this Plugin work's Only in this Versions 1.13 - 1.16!");
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4if you want a specific version then write me in the forum!");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4Attention this Plugin work's Only in this Versions 1.13 - 1.16!");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4if you want a specific version then write me in the forum!");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
             Bukkit.getConsoleSender().sendMessage("§b=         §a[§aFrameAPI]§b                     =");
@@ -182,10 +182,10 @@ public class API implements Listener {
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             ConfigStartup();
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §bLoaded");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §bLoaded");
         } else if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("de_DE")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Achtung dieses Plugin funktioniert nur in den Versionen 1.13 - 1.16");
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Wenn du eine eigene Version haben moechtest Kontaktiere mich im Forum");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4Achtung dieses Plugin funktioniert nur in den Versionen 1.13 - 1.16");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4Wenn du eine eigene Version haben moechtest Kontaktiere mich im Forum");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
             Bukkit.getConsoleSender().sendMessage("§b=         §a[§aFrameAPI]§b                     =");
@@ -193,7 +193,7 @@ public class API implements Listener {
             Bukkit.getConsoleSender().sendMessage("§b                                          ");
             Bukkit.getConsoleSender().sendMessage("§b==========================================");
             ConfigStartup();
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §bgeladen");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §bgeladen");
         }
     }
 
@@ -525,11 +525,11 @@ public class API implements Listener {
     private void ConfigStartup() {
         Information.setInformationInConfig();
         Config.loadConfig();
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §bConfig Updated");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §bConfig Updated");
         KitManager kits = new KitManager();
         createCustomConfig();
         kits.createCustomConfig();
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §bCustom Files Created!");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §bCustom Files Created!");
     }
 
     public ItemStack getItem(ItemStack mat, int itemamount, String displayname) {
@@ -551,7 +551,7 @@ public class API implements Listener {
 
     public void getInformationMYSQL(Player p) {
         ArrayList<String> issues = new ArrayList<>();
-        issues.add(0, Main.FrameMainGet.getPrefix() + " " + MYSQL.getConnection());
+        issues.add(0, Main.Variables.getPrefix() + " " + MYSQL.getConnection());
         p.sendMessage(issues.get(0));
     }
 
@@ -570,7 +570,7 @@ public class API implements Listener {
             long time = world.getTime();
             return Long.valueOf(time);
         }
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §cThis World doesn't exists!");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §cThis World doesn't exists!");
 
         return null;
     }
@@ -608,7 +608,7 @@ public class API implements Listener {
         } else {
             String text = CreateConfig.getConfig().getString("message.notactivated");
             text = text.replace('&', '§');
-            p.sendMessage(Main.FrameMainGet.getPrefix() + " " + text);
+            p.sendMessage(Main.Variables.getPrefix() + " " + text);
         }
     }
 
@@ -687,11 +687,11 @@ public class API implements Listener {
                 !e.getPlayer().hasPlayedBefore()) {
             Player player = e.getPlayer();
             if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("en_EN")) {
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " §aVisit the Config.yml");
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " §aLocation = §bplugins/FrameAPI/config.yml");
+                player.sendMessage(Main.Variables.getPrefix() + " §aVisit the Config.yml");
+                player.sendMessage(Main.Variables.getPrefix() + " §aLocation = §bplugins/FrameAPI/config.yml");
             } else if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("de_DE")) {
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " §aBesuche die Config.yml");
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " §aPfad zur Datei = §bplugins/FrameAPI/config.yml");
+                player.sendMessage(Main.Variables.getPrefix() + " §aBesuche die Config.yml");
+                player.sendMessage(Main.Variables.getPrefix() + " §aPfad zur Datei = §bplugins/FrameAPI/config.yml");
             }
         }
     }
@@ -1011,7 +1011,7 @@ public class API implements Listener {
 
     public void donationLink(Player player) {
         TextComponent tc = new TextComponent();
-        tc.setText(Main.FrameMainGet.getPrefix() + " §6[§bKlick Hier für die Seite zu öffnen§6]");
+        tc.setText(Main.Variables.getPrefix() + " §6[§bKlick Hier für die Seite zu öffnen§6]");
         tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§aöffne Donation Seite").create()));
         tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://streamlabs.com/framedesigner_plays/tip"));
         player.spigot().sendMessage(tc);

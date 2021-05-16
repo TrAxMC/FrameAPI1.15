@@ -76,7 +76,7 @@ public class MultiWorldManager {
         if (world != null) {
             world.setDifficulty(difficulty);
         } else {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §cDiese Welt existiert nicht!");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §cDiese Welt existiert nicht!");
         }
     }
 

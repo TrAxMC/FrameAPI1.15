@@ -26,12 +26,12 @@ public class FlyCMD
                         if (player.getAllowFlight() == true) {
                             player.setAllowFlight(false);
                             player.setFlying(false);
-                            player.sendMessage("§aYou can no more Fly!");
+                            player.sendMessage(Main.Variables.getPrefix()  + " §aYou can no more Fly!");
                             return true;
                         }
                         player.setAllowFlight(true);
                         player.setFlying(true);
-                        player.sendMessage("§aYou can now Fly!");
+                        player.sendMessage(Main.Variables.getPrefix() + " §aYou can now Fly!");
                         return true;
                     }
 
@@ -43,18 +43,18 @@ public class FlyCMD
                         if (target.getAllowFlight()) {
                             target.setAllowFlight(false);
                             target.setFlying(false);
-                            target.sendMessage("§aYou can no more Fly!");
-                            sender.sendMessage("§b" + target.getName() + " §aCan no more Fly!");
+                            target.sendMessage(Main.Variables.getPrefix() + " §aYou can no more Fly!");
+                            sender.sendMessage(Main.Variables.getPrefix() + " §b" + target.getName() + " §aCan no more Fly!");
                             return true;
                         }
                         target.setAllowFlight(true);
                         target.setFlying(true);
-                        target.sendMessage("§aYou can now Fly!");
-                        sender.sendMessage("§b" + target.getName() + " §aCan now Fly!");
+                        target.sendMessage(Main.Variables.getPrefix() + " §aYou can now Fly!");
+                        sender.sendMessage(Main.Variables.getPrefix() + " §b" + target.getName() + " §aCan now Fly!");
                         return true;
                     }
 
-                    sender.sendMessage("§cThis Player i'snt Online!");
+                    sender.sendMessage(Main.Variables.getPrefix() + " §cThis Player i'snt Online!");
                 }
             }
         }

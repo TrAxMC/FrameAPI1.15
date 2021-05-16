@@ -32,7 +32,7 @@ public class EnderChestCMD implements CommandExecutor {
                 if(player.hasPermission("frameapi.enderchest")) {
                     player.openInventory(player.getEnderChest());
                 } else {
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else if (args.length == 1) {
                 if(player.hasPermission("frameapi.enderchest.other")) {
@@ -40,10 +40,10 @@ public class EnderChestCMD implements CommandExecutor {
                     if(target != null) {
                         player.openInventory(target.getEnderChest());
                     } else {
-                        player.sendMessage(Main.FrameMainGet.getPrefix() + " §cThis Player i'snt Online!");
+                        player.sendMessage(Main.Variables.getPrefix() + " §cThis Player i'snt Online!");
                     }
                 } else {
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             }
         }

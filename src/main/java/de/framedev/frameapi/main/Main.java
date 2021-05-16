@@ -2,7 +2,6 @@ package de.framedev.frameapi.main;
 
 import de.framedev.frameapi.api.API;
 import de.framedev.frameapi.api.SavePlayersInventory;
-import de.framedev.frameapi.api.VaultAPI;
 import de.framedev.frameapi.glass.Cocktail;
 import de.framedev.frameapi.kits.KitManager;
 
@@ -22,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.ResultSet;
@@ -38,7 +36,6 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
@@ -57,18 +54,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-@SuppressWarnings("deprecation")
 public final class Main extends JavaPlugin implements Listener {
 
-    private static int resource = 68558;
+    private static final int resource = 68558;
     static File file = new File("plugins/FrameAPI/entitys.yml");
     private static Main mi;
-    private static API api = new API();
-    private static KitManager kit = new KitManager();
+    private static final API api = new API();
+    private static final KitManager kit = new KitManager();
     private static String noperm;
     private static String prefix;
     public ArrayList<String> pays = new ArrayList<>();
@@ -82,7 +77,7 @@ public final class Main extends JavaPlugin implements Listener {
     public static File filem = new File("plugins/MDBConnection/config.yml");
     public static FileConfiguration cfgm = (FileConfiguration) YamlConfiguration.loadConfiguration(filem);
     private boolean mongodb;
-    private VaultAPI eco;
+    private VaultManager vaultManager;
 
 
     public void onEnable() {
@@ -128,7 +123,7 @@ public final class Main extends JavaPlugin implements Listener {
             if (getInstance().getConfig().getBoolean("NoNight")) {
                 api.NoNight();
             } else {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §cNo Night Disabled!!");
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §cNo Night Disabled!!");
             }
             if (getConfig().getBoolean("MessageOfReload.Boolean")) {
                 api.sendMessageofReload();
@@ -137,14 +132,14 @@ public final class Main extends JavaPlugin implements Listener {
                 SQL.createTable("pays", "PlayerTo TEXT(11)", "payAmount INT", " PlayerFrom TEXT");
                 SQL.createTable("offline", "PlayerName TEXT(11)", "boolean TEXT");
             } else {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §cNo MySQL not Activated, §aFuctions §care Disabled");
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §cNo MySQL not Activated, §aFuctions §care Disabled");
             }
             api.onUpdate();
         } else if (getConfig().getString("language").equalsIgnoreCase("de_DE")) {
             if (getInstance().getConfig().getBoolean("NoNight")) {
                 api.NoNight();
             } else {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §cNo Night ausgeschaltet!");
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §cNo Night ausgeschaltet!");
             }
             if (getConfig().getBoolean("MessageOfReload.Boolean")) {
                 api.sendMessageofReload();
@@ -156,13 +151,13 @@ public final class Main extends JavaPlugin implements Listener {
                 SQL.createTable("pays", "PlayerTo TEXT(11)", "payAmount INT", " PlayerFrom TEXT");
                 SQL.createTable("offline", "PlayerName TEXT(11)", "boolean TEXT");
             } else {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §cMYSQL ist nicht aktiviert");
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §cMYSQL ist nicht aktiviert");
             }
             api.onUpdate();
         } else {
-            Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §4Please use en_EN or de_DE!!!");
+            Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §4Please use en_EN or de_DE!!!");
         }
-        Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §c§lEnergy is Work in Progress!");
+        Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §c§lEnergy is Work in Progress!");
         Thread thread = new Thread(new SchedulerManager());
         new BukkitRunnable() {
             @Override
@@ -175,11 +170,7 @@ public final class Main extends JavaPlugin implements Listener {
         if(Bukkit.getPluginManager().getPlugin("Vault") != null) {
             setup();
         }
-        Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §6Successfully Loaded!!!");
-    }
-
-    public VaultAPI getEco() {
-        return eco;
+        Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §6Successfully Loaded!!!");
     }
 
     public boolean isMongoDb() {
@@ -191,12 +182,12 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " §aDeactivated!");
+        Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " §aDeactivated!");
         api.onUpdate();
         if (getConfig().getBoolean("MYSQL.Boolean") &&
                 MYSQL.con != null) {
             MYSQL.close();
-            Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " " + MYSQL.MySQLPrefix + " §bMYSQL Closed!");
+            Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " " + MYSQL.MySQLPrefix + " §bMYSQL Closed!");
         }
     }
 
@@ -205,24 +196,24 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public static void updateCheckerPlayer(Player player) {
-        player.sendMessage(FrameMainGet.getPrefix() + " Checking for updates...");
+        player.sendMessage(Variables.getPrefix() + " Checking for updates...");
         try {
             URLConnection conn = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resource).openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String oldVersion = Main.getInstance().getDescription().getVersion();
             String newVersion = br.readLine();
             if (!newVersion.equalsIgnoreCase(oldVersion)) {
-                player.sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
+                player.sendMessage(Variables.getPrefix() + " A new update is available: version " + newVersion);
                 TextComponent tc = new TextComponent();
-                tc.setText(FrameMainGet.getPrefix() + " §6[§bKlick Hier für die Seite zu öffnen§6]");
+                tc.setText(Variables.getPrefix() + "§aDonation §c: §6[§bKlick Hier für die Seite zu öffnen§6]");
                 tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(" öffne Download Seite").create()));
                 tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/frameapi.68558/"));
                 player.spigot().sendMessage(tc);
             } else {
-                player.sendMessage(FrameMainGet.getPrefix() + " You're running the newest plugin version!");
+                player.sendMessage(Variables.getPrefix() + " You're running the newest plugin version!");
             }
         } catch (IOException e) {
-            player.sendMessage(FrameMainGet.getPrefix() + " Failed to check for updates on spigotmc.org");
+            player.sendMessage(Variables.getPrefix() + " Failed to check for updates on spigotmc.org");
         }
     }
 
@@ -395,7 +386,7 @@ public final class Main extends JavaPlugin implements Listener {
                             }
                         }
                     }
-                    Bukkit.broadcastMessage(FrameMainGet.getPrefix() + " §cAll Entitys Deleted!");
+                    Bukkit.broadcastMessage(Variables.getPrefix() + " §cAll Entitys Deleted!");
                 }
             }, 60L);
         }
@@ -435,7 +426,7 @@ public final class Main extends JavaPlugin implements Listener {
                     sender.sendMessage("§cPlease use §b/addentity (entitytype)");
                 }
             } else {
-                sender.sendMessage(FrameMainGet.getPrefix() + " " + FrameMainGet.getNoPerm());
+                sender.sendMessage(Variables.getPrefix() + " " + Variables.getNoPerm());
             }
         }
         if (command.getName().equalsIgnoreCase("health") && sender instanceof Player) {
@@ -504,21 +495,19 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void checkUpdate() {
-        Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " Checking for updates...");
+        Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " Checking for updates...");
         try {
             URLConnection conn = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resource).openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String oldVersion = Main.getInstance().getDescription().getVersion();
             String newVersion = br.readLine();
             if (!newVersion.equalsIgnoreCase(oldVersion)) {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " A new update is available: version " + newVersion);
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " A new update is available: version " + newVersion);
             } else {
-                Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " You're running the newest plugin version!");
+                Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " You're running the newest plugin version!");
             }
-        } catch (MalformedURLException e) {
-            Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " Failed to check for updates on spigotmc.org");
         } catch (IOException e) {
-            Bukkit.getConsoleSender().sendMessage(FrameMainGet.getPrefix() + " Failed to check for updates on spigotmc.org");
+            Bukkit.getConsoleSender().sendMessage(Variables.getPrefix() + " Failed to check for updates on spigotmc.org");
         }
     }
 
@@ -538,45 +527,8 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     public void setup() {
-        File filedata = new File(Main.getInstance().getDataFolder() + "/money","eco.yml");
-        FileConfiguration cfgdata = YamlConfiguration.loadConfiguration(filedata);
-        if(!filedata.exists()) {
-            filedata.getParentFile().mkdirs();
-            try {
-                filedata.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if(Bukkit.getServer().getOnlineMode()) {
-            if(!cfgdata.contains("accounts")) {
-                ArrayList<String> accounts = new ArrayList<>();
-                accounts.add("14555508-6819-4434-aa6a-e5ce1509ea35");
-                cfgdata.set("accounts",accounts);
-                try {
-                    cfgdata.save(filedata);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            if(!cfgdata.contains("accounts")) {
-                ArrayList<String> accounts = new ArrayList<>();
-                accounts.add("sambakuchen");
-                cfgdata.set("accounts",accounts);
-                try {
-                    cfgdata.save(filedata);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        getServer().getServicesManager().register(Economy.class,new VaultAPI(),this, ServicePriority.Normal);
-        eco = new VaultAPI();
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (!eco.hasAccount(p.getName()))
-                eco.createPlayerAccount(p.getName());
-        }
+        if(getServer().getPluginManager().getPlugin("Vault") != null)
+            this.vaultManager = new VaultManager(this);
     }
 
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -590,7 +542,7 @@ public final class Main extends JavaPlugin implements Listener {
         return super.onTabComplete(sender, command, alias, args);
     }
 
-    public static class FrameMainGet {
+    public static class Variables {
         public static String getPrefix() {
             Main.prefix = Main.getInstance().getConfig().getString("Prefix");
             Main.prefix = Main.prefix.replace('&', '§');
@@ -601,7 +553,6 @@ public final class Main extends JavaPlugin implements Listener {
             prefix = Main.getInstance().getConfig().getString("Prefix");
             prefix = prefix.replace('&', '§');
             Main.noperm = Main.noperm.replace('\"', '\'');
-            Main.getInstance();
             Main.prefix = prefix;
 
         }
@@ -620,31 +571,28 @@ public final class Main extends JavaPlugin implements Listener {
         }
     }
 
-    public static String getPrefix() {
-        Main.prefix = Main.getInstance().getConfig().getString("Prefix");
-        Main.prefix = Main.prefix.replace('&', '§');
-        return Main.prefix;
+    public String getPrefix() {
+        return Main.Variables.getPrefix();
     }
 
-    public static void setPrefix(String prefix) {
+    private void setPrefix(String prefix) {
         prefix = Main.getInstance().getConfig().getString("Prefix");
         prefix = prefix.replace('&', '§');
         Main.noperm = Main.noperm.replace('\"', '\'');
-        Main.getInstance();
         Main.prefix = prefix;
-
     }
 
-    public static String getNoPerm() {
-        Main.noperm = Main.getInstance().getConfig().getString("NoPerm");
-        Main.noperm = ReplaceCharConfig.replaceParagraph(Main.noperm);
-        Main.noperm = Main.noperm.replace('\"', '\'');
-        return Main.noperm;
+    public String getNoPerm() {
+        return Main.Variables.getNoPerm();
     }
 
-    public static void setNoPerm(String noperm) {
+    private void setNoPerm(String noperm) {
         noperm = Main.getInstance().getConfig().getString("NoPerm");
         noperm = ReplaceCharConfig.replaceParagraph(noperm);
         Main.noperm = noperm;
+    }
+
+    public VaultManager getVaultManager() {
+        return vaultManager;
     }
 }

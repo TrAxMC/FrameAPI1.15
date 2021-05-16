@@ -40,7 +40,7 @@ public class WarpSigns
                 e.setLine(0, "§1[Warp]");
                 e.setLine(1, name);
             } else {
-                e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
             }
         }
     }
@@ -61,7 +61,7 @@ public class WarpSigns
                         e.getPlayer().teleport(loc);
                     }
                 } else {
-                    e.getPlayer().sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    e.getPlayer().sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
         }
     }

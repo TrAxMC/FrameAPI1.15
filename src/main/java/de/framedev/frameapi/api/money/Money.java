@@ -23,7 +23,7 @@ public class Money implements Listener {
 
 	public void createAccount(OfflinePlayer player) {
 		if (Bukkit.getPluginManager().getPlugin("Vault") != null)
-			Main.getInstance().getEco().createPlayerAccount(player);
+			Main.getInstance().getVaultManager().getEco().createPlayerAccount(player);
 	}
 
 	private void saveMoneyFile() {
@@ -44,7 +44,7 @@ public class Money implements Listener {
 
 	public Double getMoney(OfflinePlayer player) {
 		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-			return Main.getInstance().getEco().getBalance(player);
+			return Main.getInstance().getVaultManager().getEco().getBalance(player);
 		} else {
 			File file = new File(Main.getInstance().getDataFolder() + "/money", "eco.yml");
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
@@ -65,7 +65,7 @@ public class Money implements Listener {
 
 	public void addMoney(OfflinePlayer player, double amount) {
 		if (Bukkit.getPluginManager().getPlugin("Vault") != null) {
-			Main.getInstance().getEco().depositPlayer(player, amount);
+			Main.getInstance().getVaultManager().getEco().depositPlayer(player, amount);
 		} else {
 			double balance = getMoney(player);
 	        balance += amount;

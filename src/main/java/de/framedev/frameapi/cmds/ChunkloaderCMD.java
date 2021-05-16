@@ -133,7 +133,7 @@ public class ChunkloaderCMD
                         player.sendMessage("§b" + args[0] + " §aRemoved to ChunkLoader");
                     }
                 } else {
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             }
         }

@@ -49,7 +49,7 @@
              Bukkit.getPluginManager().callEvent((Event)sendMessageEvent);
              return true;
            } 
-           p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+           p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            return true;
          } 
  
@@ -77,7 +77,7 @@
              p.sendMessage("§a[§aFrameAPI]§b Reload Config successfully!");
              return true;
            } 
-           p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+           p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
            return true;
          } 
  
@@ -115,12 +115,12 @@
                if (args[1].equalsIgnoreCase("on")) {
                  Main.getInstance().getConfig().set("StartMoney", Boolean.valueOf(true));
                  Main.getInstance().saveConfig();
-                 p.sendMessage(Main.FrameMainGet.getPrefix() + " §bStartBudget Enabled");
+                 p.sendMessage(Main.Variables.getPrefix() + " §bStartBudget Enabled");
                  return true;
                }  if (args[1].equalsIgnoreCase("off")) {
                  Main.getInstance().getConfig().set("StartMoney", Boolean.valueOf(false));
                  Main.getInstance().saveConfig();
-                 p.sendMessage(Main.FrameMainGet.getPrefix() + " §bStartBudget Disabled");
+                 p.sendMessage(Main.Variables.getPrefix() + " §bStartBudget Disabled");
                  return true;
                }  if (args[1].equalsIgnoreCase("set")) {
  
@@ -132,7 +132,7 @@
                  String money1 = String.valueOf(money);
                  text = text.replace("[Money]", money1);
                  text = text.replace('&', '§');
-                 p.sendMessage(Main.FrameMainGet.getPrefix() + " " + text);
+                 p.sendMessage(Main.Variables.getPrefix() + " " + text);
                  return true;
                } 
              } catch (ArrayIndexOutOfBoundsException e) {
@@ -140,7 +140,7 @@
                return true;
              } 
            } else {
-             p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
              return true;
            } 
          } 
@@ -160,7 +160,7 @@
            
            } else if (sender instanceof Player) {
              Player p = (Player)sender;
-             p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+             p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
              return true;
            }
          

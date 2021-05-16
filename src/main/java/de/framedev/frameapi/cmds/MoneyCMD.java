@@ -27,9 +27,9 @@ public class MoneyCMD
             plugin.getCommand("pay").setTabCompleter(this);
             plugin.getCommand("balancetop").setExecutor(this);
         } else if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("en_EN")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Money Commands are Disabled");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4Money Commands are Disabled");
         } else if (Main.getInstance().getConfig().getString("language").equalsIgnoreCase("de_DE")) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §4Money Commands sind Deaktiviert");
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §4Money Commands sind Deaktiviert");
         }
     }
 
@@ -70,7 +70,7 @@ public class MoneyCMD
                             return true;
                         } else {
 
-                            p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                            p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                             return true;
                         }
                     } else {
@@ -78,7 +78,7 @@ public class MoneyCMD
                         return true;
                     }
                 } else {
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     return true;
                 }
             }
@@ -177,14 +177,14 @@ public class MoneyCMD
                                 }
                             }
                         }
-                        p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                        p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                         return true;
                     }
 
                     p.sendMessage("§cPlease use §b/set (amount) §cor §b/set (palyer) (amount)");
                 } else {
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     return true;
                 }
             }
@@ -211,7 +211,7 @@ public class MoneyCMD
                     return true;
 
                 } else {
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     return true;
                 }
             }
@@ -242,7 +242,7 @@ public class MoneyCMD
                         sender.sendMessage(Text);
                         return true;
                     } else {
-                        sender.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                        sender.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     sender.sendMessage("§cuse /set (target) (amount)");
@@ -274,7 +274,7 @@ public class MoneyCMD
                         sender.sendMessage("§cuse /balance (target)");
                     }
                 } else {
-                    sender.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    sender.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             }
         }

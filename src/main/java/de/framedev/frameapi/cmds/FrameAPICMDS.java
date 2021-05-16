@@ -185,7 +185,7 @@ public class FrameAPICMDS
                 return true;
             }
 
-            p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+            p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
             return true;
         }
@@ -215,7 +215,7 @@ public class FrameAPICMDS
                         return true;
                     }
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                     return true;
                 }
@@ -248,7 +248,7 @@ public class FrameAPICMDS
 
             if (args.length == 0) {
 
-                p.sendMessage(Main.FrameMainGet.getPrefix() + " §aPlease use §b/spawnmob (type) §aor §b/spawnmob (type) (amount)");
+                p.sendMessage(Main.Variables.getPrefix() + " §aPlease use §b/spawnmob (type) §aor §b/spawnmob (type) (amount)");
 
                 return true;
 
@@ -333,7 +333,7 @@ public class FrameAPICMDS
                     }
 
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                     return true;
                 }
@@ -359,7 +359,7 @@ public class FrameAPICMDS
                     return true;
                 }
 
-                p.sendMessage(Main.FrameMainGet.getPrefix() + " §aPlease use §b/denied add (word) §aor §b/denied remove (word)");
+                p.sendMessage(Main.Variables.getPrefix() + " §aPlease use §b/denied add (word) §aor §b/denied remove (word)");
             } else {
 
 
@@ -367,7 +367,7 @@ public class FrameAPICMDS
 
                 text = text.replace('&', '§');
 
-                p.sendMessage(Main.FrameMainGet.getPrefix() + " " + text);
+                p.sendMessage(Main.Variables.getPrefix() + " " + text);
             }
         }
 
@@ -424,7 +424,7 @@ public class FrameAPICMDS
             } else {
 
 
-                p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                 return true;
             }
@@ -441,7 +441,7 @@ public class FrameAPICMDS
 
                     API.Warp.setWarpLocation(args[0], p.getLocation());
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + args[0] + " §aWarp has been set");
+                    p.sendMessage(Main.Variables.getPrefix() + " " + args[0] + " §aWarp has been set");
                     try {
 
                         cfgwarp.load(warpfile);
@@ -521,7 +521,7 @@ public class FrameAPICMDS
                         }
                     } else {
 
-                        p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                        p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                         return true;
                     }
@@ -531,7 +531,7 @@ public class FrameAPICMDS
 
                     text = text.replace('&', '§');
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + text);
+                    p.sendMessage(Main.Variables.getPrefix() + " " + text);
                 }
             } else {
 
@@ -550,17 +550,17 @@ public class FrameAPICMDS
 
                     Bukkit.dispatchCommand((CommandSender) player, "gamerule naturalRegeneration true");
 
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " §bUltrahardcore disabled");
+                    player.sendMessage(Main.Variables.getPrefix() + " §bUltrahardcore disabled");
                 } else {
 
                     Bukkit.dispatchCommand((CommandSender) player, "gamerule naturalRegeneration false");
 
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " §bUltrahardcore enabled");
+                    player.sendMessage(Main.Variables.getPrefix() + " §bUltrahardcore enabled");
                 }
             } else {
 
 
-                player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                 return true;
             }
@@ -581,7 +581,7 @@ public class FrameAPICMDS
 
                         String message = API.CreateConfig.getConfig().getString("Warp.warpremoved");
 
-                        message = message.replace("[Prefix]", Main.FrameMainGet.getPrefix());
+                        message = message.replace("[Prefix]", Main.Variables.getPrefix());
 
                         message = message.replace("[Warpname]", args[0]);
 
@@ -610,7 +610,7 @@ public class FrameAPICMDS
             } else {
 
 
-                sender.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                sender.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                 return true;
             }
@@ -668,7 +668,7 @@ public class FrameAPICMDS
                     }
                 } else {
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
 
                     return true;
                 }
@@ -700,7 +700,7 @@ public class FrameAPICMDS
                     }
                 } else {
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else {
 
@@ -727,7 +727,7 @@ public class FrameAPICMDS
                     }
                 } else {
 
-                    p.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    p.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else {
 
@@ -963,7 +963,7 @@ public class FrameAPICMDS
                     }
                 } else {
 
-                    player.sendMessage(Main.FrameMainGet.getPrefix() + " " + Main.FrameMainGet.getNoPerm());
+                    player.sendMessage(Main.Variables.getPrefix() + " " + Main.Variables.getNoPerm());
                 }
             } else {
 

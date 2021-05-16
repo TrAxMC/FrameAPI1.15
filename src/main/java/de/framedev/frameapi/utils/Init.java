@@ -36,7 +36,7 @@ public class Init implements Constructors {
                 new Energy();
                 new EnergyCMD(plugin);
                 pm.registerEvents((Listener) new CapacitorListener(), (Plugin) plugin);
-                Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §6successfully Energy Registered!");
+                Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §6successfully Energy Registered!");
             }
         }
         if(plugin.getConfig().getBoolean("BungeeCord")) {
@@ -114,7 +114,7 @@ public class Init implements Constructors {
         pm.registerEvents((Listener) new LeaveListener(), (Plugin) plugin);
         pm.registerEvents((Listener) new JoinListener(), (Plugin) plugin);
         pm.registerEvents(new SleepListener(),plugin);
-        Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §6successfully initialized");
+        Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §6successfully initialized");
     }
 
     private final Main plugin;

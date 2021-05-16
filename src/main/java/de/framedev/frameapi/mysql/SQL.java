@@ -24,9 +24,9 @@ public class SQL {
             PreparedStatement stmt = MYSQL.getConnection().prepareStatement(sql);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue Create Table §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue Create Table §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -50,9 +50,9 @@ public class SQL {
             Statement stmt = MYSQL.getConnection().createStatement();
             stmt.executeUpdate(builder2);
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue insertData §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue insertData §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -68,9 +68,9 @@ public class SQL {
             Statement stmt = MYSQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue if updateData §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue if updateData §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -88,9 +88,9 @@ public class SQL {
             Statement stmt = MYSQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue deleteData §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue deleteData §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -119,9 +119,9 @@ public class SQL {
 
             return false;
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue if Exists Data §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue if Exists Data §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -153,9 +153,9 @@ public class SQL {
 
             return o;
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue getObject §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue getObject §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -173,9 +173,9 @@ public class SQL {
             Statement stmt = MYSQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue Delete Table §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue Delete Table §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();
@@ -193,9 +193,9 @@ public class SQL {
             return false;
 
         } catch (SQLException e) {
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "An Issue isTableExists Table §6: §f" + e.getMessage());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getSQLState());
-            Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + "§6: §f" + e.getErrorCode());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "An Issue isTableExists Table §6: §f" + e.getMessage());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getSQLState());
+            Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + "§6: §f" + e.getErrorCode());
         } finally {
             if (MYSQL.con != null) {
                 MYSQL.close();

@@ -8,7 +8,6 @@ import de.framedev.frameapi.mysql.SQL;
 import de.framedev.frameapi.warps.WarpSigns;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /*
@@ -44,7 +43,7 @@ public class SchedulerManager implements Runnable {
                         loc.getChunk().setForceLoaded(true);
                     }
                 }
-                Bukkit.getConsoleSender().sendMessage(Main.FrameMainGet.getPrefix() + " §aChunkloader Activated!");
+                Bukkit.getConsoleSender().sendMessage(Main.Variables.getPrefix() + " §aChunkloader Activated!");
             }
         }.runTaskLater(Main.getInstance(), 60L);
         if (Main.getInstance().getConfig().getBoolean("MYSQL.Boolean")) {
