@@ -7,6 +7,8 @@ main: de.framedev.frameapi.main.Main
 load: STARTUP
 loadbefore:
   - MDBConnection
+softdepend:
+  - Vault
 commands:
   setwheat:
   getwheat:
