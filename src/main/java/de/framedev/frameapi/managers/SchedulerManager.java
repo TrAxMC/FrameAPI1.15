@@ -1,11 +1,9 @@
 package de.framedev.frameapi.managers;
 
 import de.framedev.frameapi.cmds.ChunkloaderCMD;
-import de.framedev.frameapi.listeners.money.GetMoneyInTime;
 import de.framedev.frameapi.main.Main;
 import de.framedev.frameapi.mysql.MYSQL;
 import de.framedev.frameapi.mysql.SQL;
-import de.framedev.frameapi.warps.WarpSigns;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,15 +18,10 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class SchedulerManager implements Runnable {
 
-    GetMoneyInTime getMoneyInTime = new GetMoneyInTime(Main.getInstance());
     @Override
     public void run() {
         Main.getInstance().saveDefaultConfig();
         if (Main.getInstance().getConfig().getBoolean("MYSQL.Boolean")) {
-            if (WarpSigns.UtilinConfigList("Money")) {
-                getMoneyInTime.getOfflinePlayerMoney();
-                getMoneyInTime.getMoneyinTime();
-            }
         }
         Main.getInstance().savePlayersInventory();
         startRunnables();

@@ -99,6 +99,28 @@ public class BackendManager {
         }
     }
 
+    public boolean exists(String where, Object data, String whereSelected, String collection) {
+        if (existsCollection(collection)) {
+            MongoCollection<Document> collections = this.plugin.getMongoManager().getDatabase().getCollection(collection);
+            Document document = collections.find(new Document(where, data)).first();
+            if (document != null) {
+                return document.get(whereSelected) != null;
+            }
+        }
+        return false;
+    }
+
+    public boolean exists(OfflinePlayer player, String where, String collection) {
+        if (existsCollection(collection)) {
+            String uuid = player.getUniqueId().toString();
+            MongoCollection<Document> collections = this.plugin.getMongoManager().getDatabase().getCollection(collection);
+            Document document = collections.find(new Document("uuid", uuid)).first();
+            if (document != null) {
+                return document.get(where) != null;
+            }
+        }
+        return false;
+    }
 
     public void updateUser(OfflinePlayer player, String where, Object data, String collection) {
         if (existsCollection(collection)) {

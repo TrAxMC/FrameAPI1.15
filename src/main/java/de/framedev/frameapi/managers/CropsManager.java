@@ -25,7 +25,6 @@ public class CropsManager {
         }
     }
 
-
     public void setBeetRoot(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
@@ -42,7 +41,6 @@ public class CropsManager {
             }
         }
     }
-
 
     public void getBeetRoot(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
@@ -62,7 +60,6 @@ public class CropsManager {
             }
         }
     }
-
 
     public void getWheat(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
@@ -84,7 +81,6 @@ public class CropsManager {
         }
     }
 
-
     public void setCarrot(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
@@ -101,7 +97,6 @@ public class CropsManager {
             }
         }
     }
-
 
     public void getCarrot(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
@@ -122,7 +117,6 @@ public class CropsManager {
         }
     }
 
-
     public void setPotato(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
             for (int z = minZ; z <= maxZ; z++) {
@@ -139,7 +133,6 @@ public class CropsManager {
             }
         }
     }
-
 
     public void getPotato(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {
@@ -167,22 +160,22 @@ public class CropsManager {
                     if (world.getBlockAt(x, y, z).getType() != Material.FARMLAND &&
                             world.getBlockAt(x, y, z).getType() != Material.WATER) {
                         if (world.getBlockAt(x - 1, y, z).getType() == Material.WATER) {
-                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x,y,z).getType() == Material.SAND) {
+                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x, y, z).getType() == Material.SAND) {
                                 Block block = world.getBlockAt(x, y + 1, z);
                                 block.setType(Material.SUGAR_CANE);
                             }
                         } else if (world.getBlockAt(x + 1, y, z).getType() == Material.WATER) {
-                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x,y,z).getType() == Material.SAND) {
+                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x, y, z).getType() == Material.SAND) {
                                 Block block = world.getBlockAt(x, y + 1, z);
                                 block.setType(Material.SUGAR_CANE);
                             }
                         } else if (world.getBlockAt(x, y, z + 1).getType() == Material.WATER) {
-                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x,y,z).getType() == Material.SAND) {
+                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x, y, z).getType() == Material.SAND) {
                                 Block block = world.getBlockAt(x, y + 1, z);
                                 block.setType(Material.SUGAR_CANE);
                             }
                         } else if (world.getBlockAt(x, y, z - 1).getType() == Material.WATER) {
-                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x,y,z).getType() == Material.SAND) {
+                            if (world.getBlockAt(x, y, z).getType() == Material.DIRT || world.getBlockAt(x, y, z).getType() == Material.GRASS_BLOCK || world.getBlockAt(x, y, z).getType() == Material.SAND) {
                                 Block block = world.getBlockAt(x, y + 1, z);
                                 block.setType(Material.SUGAR_CANE);
                             }
@@ -192,7 +185,6 @@ public class CropsManager {
             }
         }
     }
-
 
     public void getSugarCane(World world, int maxX, int minX, int maxY, int minY, int maxZ, int minZ) {
         for (int x = minX; x <= maxX; x++) {

@@ -111,19 +111,7 @@ public class VaultAPI extends AbstractEconomy {
 
     @Override
     public double getBalance(String s) {
-        File file = new File(Main.getInstance().getDataFolder() + "/money", "eco.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-        if (Main.getInstance().isMysql()) {
-            return new Money().getMoney(Bukkit.getOfflinePlayer(s));
-        } else if (Main.getInstance().isMongoDb()) {
-            return (double) Main.getInstance().getBackendManager().get(Bukkit.getOfflinePlayer(s), BackendManager.DATA.MONEY.getName(), "frameapi");
-        } else {
-            if (Bukkit.getServer().getOnlineMode()) {
-                return cfg.getDouble(Bukkit.getOfflinePlayer(s).getUniqueId().toString());
-            } else {
-                return cfg.getDouble(Bukkit.getOfflinePlayer(s).getName());
-            }
-        }
+        return new Money().getMoney(Bukkit.getOfflinePlayer(s));
     }
 
     @Override
@@ -148,32 +136,8 @@ public class VaultAPI extends AbstractEconomy {
     public EconomyResponse withdrawPlayer(String s, double v) {
         if (!hasAccount(s))
             return new EconomyResponse(0.0D, 0.0D, EconomyResponse.ResponseType.FAILURE, "The Player does not have an Account!");
-        double balance = getBalance(s);
-        if (getBalance(s) > Main.getInstance().getConfig().getDouble("Economy.MinBalance")) {
-            balance -= v;
-            if (balance < Main.getInstance().getConfig().getDouble("Economy.MinBalance"))
-                return new EconomyResponse(0.0D, balance, EconomyResponse.ResponseType.FAILURE, " frameapi ");
-            if (Main.getInstance().isMysql()) {
-                new Money().removeMoney(Bukkit.getOfflinePlayer(s), v);
-            } else if (Main.getInstance().isMongoDb()) {
-                Main.getInstance().getBackendManager().updateUser(Bukkit.getOfflinePlayer(s), BackendManager.DATA.MONEY.getName(), balance, "frameapi");
-            } else {
-                File file = new File(Main.getInstance().getDataFolder() + "/money", "eco.yml");
-                FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                if (Bukkit.getServer().getOnlineMode()) {
-                    cfg.set(Bukkit.getOfflinePlayer(s).getUniqueId().toString(), balance);
-                } else {
-                    cfg.set(Bukkit.getOfflinePlayer(s).getName(), balance);
-                }
-                try {
-                    cfg.save(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-        return new EconomyResponse(v, balance, EconomyResponse.ResponseType.SUCCESS, "");
+        new Money().removeMoney(Bukkit.getOfflinePlayer(s), v);
+        return new EconomyResponse(v, new Money().getMoney(Bukkit.getOfflinePlayer(s)), EconomyResponse.ResponseType.SUCCESS, "");
     }
 
     @Override
@@ -188,29 +152,8 @@ public class VaultAPI extends AbstractEconomy {
         if (v < 0.0D)
             return new EconomyResponse(0.0D, 0.0D, EconomyResponse.ResponseType.FAILURE, "Value is less than zero!");
         double balance = getBalance(s);
-        balance += v;
-        if (Main.getInstance().isMysql()) {
-            new Money().addMoney(Bukkit.getOfflinePlayer(s), v);
-        } else if (Main.getInstance().isMongoDb()) {
-            Main.getInstance().getBackendManager().updateUser(Bukkit.getOfflinePlayer(s), BackendManager.DATA.MONEY.getName(), balance, "frameapi");
-        } else {
-            File file = new File(Main.getInstance().getDataFolder() + "/money", "eco.yml");
-            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-            if (balance > Main.getInstance().getConfig().getDouble("Economy.MaxBalance")) {
-                return new EconomyResponse(Main.getInstance().getConfig().getDouble("Economy.MaxBalance"), 0.0D, EconomyResponse.ResponseType.FAILURE, "Bigger");
-            }
-            if (Bukkit.getServer().getOnlineMode()) {
-                cfg.set(Bukkit.getOfflinePlayer(s).getUniqueId().toString(), balance);
-            } else {
-                cfg.set(Bukkit.getOfflinePlayer(s).getName(), balance);
-            }
-            try {
-                cfg.save(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return new EconomyResponse(v, 0.0D, EconomyResponse.ResponseType.SUCCESS, "");
+        new Money().addMoney(Bukkit.getOfflinePlayer(s), v);
+        return new EconomyResponse(v, balance, EconomyResponse.ResponseType.SUCCESS, "");
     }
 
     @Override
